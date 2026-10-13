@@ -1,21 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-/** Scales the fixed 540x960 card to fit any screen (phone, tablet, desktop). */
-export function useFitScale(w = 540, h = 960, max = 1.6) {
-  const [scale, setScale] = useState(1);
-  useEffect(() => {
-    const fit = () => setScale(Math.min(window.innerWidth / w, window.innerHeight / h, max));
-    fit();
-    window.addEventListener('resize', fit);
-    window.addEventListener('orientationchange', fit);
-    return () => {
-      window.removeEventListener('resize', fit);
-      window.removeEventListener('orientationchange', fit);
-    };
-  }, [w, h, max]);
-  return scale;
-}
-
 /**
  * Controls the video invite: tap -> iris opens -> video plays (no controls)
  * -> iris closes back to the invitation when the video is about to end.
@@ -99,6 +83,26 @@ export function useStory() {
       list.forEach(clearTimeout);
     };
   }, [end]);
+
+  // Start buffering the video only once the invitation itself has loaded, so it never competes with first paint.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return undefined;
+    let timer;
+    const warm = () => {
+      timer = setTimeout(() => {
+        if (playingRef.current || v.readyState > 0) return;
+        v.preload = navigator.connection && navigator.connection.saveData ? 'metadata' : 'auto';
+        v.load();
+      }, 1200);
+    };
+    if (document.readyState === 'complete') warm();
+    else window.addEventListener('load', warm, { once: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('load', warm);
+    };
+  }, []);
 
   return { playing, start, videoRef, barRef };
 }

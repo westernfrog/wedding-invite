@@ -14,7 +14,7 @@ export default function Seal({ open, onClick }) {
         aria-hidden="true" viewBox="-52 -52 104 104" width="104" height="104"
         style={{ position: 'absolute', left: 0, top: 0, overflow: 'visible' }}
       >
-        <g className="fl-in" style={{ animationDelay: '4.9s' }}>
+        <g className="fl-in" style={{ '--d': '4.9s' }}>
           <g className="fl-idle">
             <g className="fl-t fl-t1" style={{ fill: 'var(--ground)' }} stroke="#C9A66B" strokeWidth="1" strokeLinejoin="round">
               {OUTER.map((r) => (
@@ -23,7 +23,7 @@ export default function Seal({ open, onClick }) {
             </g>
           </g>
         </g>
-        <g className="fl-in" style={{ animationDelay: '5.1s' }}>
+        <g className="fl-in" style={{ '--d': '5.1s' }}>
           <g className="fl-idle2">
             <g className="fl-t fl-t2" fill="rgba(201,166,107,0.24)" stroke="#C9A66B" strokeWidth="1" strokeLinejoin="round">
               {INNER.map((r) => (
@@ -32,7 +32,7 @@ export default function Seal({ open, onClick }) {
             </g>
           </g>
         </g>
-        <g className="fl-in" style={{ animationDelay: '5.3s' }}>
+        <g className="fl-in" style={{ '--d': '5.3s' }}>
           <g className="core">
             <circle className="coredot" cx="0" cy="0" r="17" />
             <path d="M-4.5 -6.5 L7 0 L-4.5 6.5Z" style={{ fill: 'var(--ground)' }} />

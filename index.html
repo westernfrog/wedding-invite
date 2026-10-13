@@ -4,14 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#4A0F1A" />
-    <title>Srihari weds Sasireka</title>
-    <meta name="description" content="Wedding invitation: Srihari weds Sasireka, 22 November 2026, Easwar Mahal, Annantha Nagar, Tamil Nadu." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Serif+Tamil:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- The title, description, link-preview and structured-data tags are added at build time by plugins/seo.js. -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/noto-serif-tamil-tamil.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // Runs before first paint: fits the 540x960 card to the screen and applies ?theme=green or ?theme=navy.
+      (function () {
+        var root = document.documentElement;
+        var themes = { green: '#12332B', navy: '#1B2540' };
+        var ground = themes[new URLSearchParams(location.search).get('theme')];
+        if (ground) {
+          root.style.setProperty('--ground', ground);
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', ground);
+        }
+        function fit() {
+          root.style.setProperty('--scale', Math.min(innerWidth / 540, innerHeight / 960, 1.6));
+        }
+        fit();
+        addEventListener('resize', fit);
+        addEventListener('orientationchange', fit);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

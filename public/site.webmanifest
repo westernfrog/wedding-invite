@@ -1,0 +1,15 @@
+{
+  "name": "Srihari weds Sasireka · Wedding Invitation",
+  "short_name": "Srihari & Sasireka",
+  "description": "Wedding invitation: Srihari weds Sasireka, Sunday, 22 November 2026, Easwar Mahal, Annantha Nagar, Tamil Nadu.",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#4A0F1A",
+  "theme_color": "#4A0F1A",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

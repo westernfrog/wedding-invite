@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lamp, Lotus, Mandala, Petals, Sparkle } from '../art.jsx';
+import { DETAILS as d } from '../details.js';
 
 const BRASS_LINE = 'rgba(201,166,107,0.85)';
 const TORAN = [
@@ -81,13 +82,13 @@ export default function VideoOverlay({ playing, videoRef, barRef, src }) {
           <div className="abs" style={{ top: 124, left: 0, width: 540, textAlign: 'center' }}>
             <div className="caps muted v-rise" style={{ '--d': '0.8s', letterSpacing: '0.28em' }}>The wedding of</div>
             <div className="serif v-unmask" style={{ '--d': '0.95s', marginTop: 12, fontSize: 48, lineHeight: '52px', letterSpacing: '-0.01em' }}>
-              Srihari &amp; Sasireka
+              {d.groom} &amp; {d.bride}
             </div>
           </div>
 
           <div aria-hidden="true" className="abs v-growx" style={{ '--d': '0.85s', top: 327, left: 0, width: 540, height: 1, background: 'rgba(201,166,107,0.4)' }} />
           <div className="video-band v-reveal">
-            <video ref={videoRef} src={src} playsInline preload="auto" disablePictureInPicture />
+            <video ref={videoRef} src={src} playsInline preload="none" disablePictureInPicture />
           </div>
           <svg
             aria-hidden="true" className="abs" viewBox="0 0 540 304" width="540" height="304" fill="none" stroke="#E8C98A"
@@ -105,12 +106,12 @@ export default function VideoOverlay({ playing, videoRef, barRef, src }) {
           </div>
 
           <div className="abs caps brass v-rise" style={{ '--d': '1.6s', top: 716, left: 0, width: 540, textAlign: 'center', fontWeight: 500, letterSpacing: '0.28em' }}>
-            Sunday &middot; 22 November 2026
+            {d.weekday} &middot; {d.day} {d.month} {d.year}
           </div>
           <Lotus base={1.9} step={0.15} cls="v-draw" style={{ position: 'absolute', top: 748, left: 234 }} />
-          <div className="abs serif v-rise" style={{ '--d': '2.2s', top: 800, left: 0, width: 540, textAlign: 'center', fontSize: 30, lineHeight: '34px' }}>Easwar Mahal</div>
+          <div className="abs serif v-rise" style={{ '--d': '2.2s', top: 800, left: 0, width: 540, textAlign: 'center', fontSize: 30, lineHeight: '34px' }}>{d.venue}</div>
           <div className="abs caps muted v-rise" style={{ '--d': '2.35s', top: 842, left: 0, width: 540, textAlign: 'center' }}>
-            Annantha Nagar &middot; Tamil Nadu
+            {d.place}
           </div>
 
           <div className="abs v-rise" style={{ '--d': '2s', left: 50, top: 796 }}>

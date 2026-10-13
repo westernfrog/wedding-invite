@@ -1,27 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 import { Lamp, Lotus, Mandala, Petals, Sparkle } from './art.jsx';
 import Vine from './components/Vine.jsx';
 import Seal from './components/Seal.jsx';
 import VideoOverlay from './components/VideoOverlay.jsx';
-import { useFitScale, useStory } from './hooks.js';
-
-/** Change the wording, date or venue here. */
-const DETAILS = {
-  groom: 'Srihari',
-  bride: 'Sasireka',
-  weekday: 'Sunday',
-  month: 'November',
-  day: '22',
-  year: '2026',
-  venue: 'Easwar Mahal',
-  place: 'Annantha Nagar · Tamil Nadu',
-  tamilTitle: 'திருமண அழைப்பிதழ்',
-  tamilLine: 'மகிழ்ச்சியுடன் கொண்டாட உங்களை அழைக்கிறோம்',
-  englishLine: 'With joy, we invite you to celebrate',
-};
-
-/** Open the site with ?theme=green or ?theme=navy to switch the background. */
-const THEMES = { oxblood: '#4A0F1A', green: '#12332B', navy: '#1B2540' };
+import { DETAILS } from './details.js';
+import { useStory } from './hooks.js';
 
 const PETALS = [
   { l: 70, t: 15, w: -6, dx: 40, o: 0.85, f: 2.4, size: [12, 16], bg: '#C9A66B' },
@@ -39,24 +22,12 @@ const SPARKLES = [
 ];
 
 export default function App() {
-  const scale = useFitScale();
   const { playing, start, videoRef, barRef } = useStory();
-
-  const ground = useMemo(() => {
-    const t = new URLSearchParams(window.location.search).get('theme');
-    return THEMES[t] || THEMES.oxblood;
-  }, []);
-  useEffect(() => {
-    document.documentElement.style.setProperty('--ground', ground);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', ground);
-  }, [ground]);
-
   const d = DETAILS;
   return (
     <div className="stage">
-      <div className="frame" style={{ width: 540 * scale, height: 960 * scale }}>
-        <main className="card" style={{ transform: `scale(${scale})` }}>
+      <div className="frame">
+        <main className="card">
           <Vine side="left" />
           <Vine side="right" />
 
@@ -127,7 +98,7 @@ export default function App() {
             <Petals items={PETALS} />
           </div>
 
-          <VideoOverlay playing={playing} videoRef={videoRef} barRef={barRef} src={`${import.meta.env.BASE_URL}story.mp4`} />
+          <VideoOverlay playing={playing} videoRef={videoRef} barRef={barRef} src="story.mp4" />
         </main>
       </div>
     </div>
