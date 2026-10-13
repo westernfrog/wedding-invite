@@ -1,0 +1,168 @@
+:root {
+  --ground: #4a0f1a;
+  --ivory: #f3ebdd;
+  --brass: #c9a66b;
+  --gold: #e8c98a;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; }
+body {
+  background: var(--ground);
+  color: var(--ivory);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; }
+
+/* ---------- layout ---------- */
+.stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+.frame { position: relative; flex: none; }
+.card {
+  position: absolute; left: 0; top: 0; width: 540px; height: 960px;
+  padding: 48px 40px; display: flex; flex-direction: column; overflow: hidden;
+  background: var(--ground); transform-origin: 0 0;
+}
+.serif { font-family: 'Instrument Serif', serif; }
+.tamil { font-family: 'Noto Serif Tamil', serif; }
+.caps { font-size: 12px; line-height: 16px; letter-spacing: 0.24em; text-transform: uppercase; }
+.muted { color: rgba(243, 235, 221, 0.72); }
+.brass { color: var(--brass); }
+
+.arch {
+  position: relative; flex: none; height: 632px; display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between; text-align: center; padding: 56px 24px 32px;
+}
+.arch-lines { position: absolute; left: 0; bottom: 0; }
+.arch-dot-wrap { position: absolute; left: 0; bottom: 0; width: 460px; height: 632px; }
+.arch-mandala { position: absolute; left: 50%; top: 336px; width: 340px; height: 340px; margin: -170px 0 0 -170px; }
+.arch-top { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lamp { position: relative; }
+.lamp-glow { position: absolute; left: 50%; border-radius: 50%; background: rgba(232, 201, 138, 0.2); }
+.lamp svg { position: relative; display: block; }
+.arch-names { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.name { font-family: 'Instrument Serif', serif; font-size: 92px; line-height: 88px; letter-spacing: -0.02em; }
+.weds-row { display: flex; align-items: center; gap: 16px; }
+.hair { width: 32px; height: 1px; background: rgba(201, 166, 107, 0.7); }
+.weds { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 30px; line-height: 40px; color: var(--brass); }
+.arch-bottom { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.tamil-line { max-width: 280px; font-size: 15px; line-height: 24px; color: rgba(243, 235, 221, 0.92); }
+.en-line { max-width: 260px; margin-bottom: 6px; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 20px; line-height: 27px; color: rgba(243, 235, 221, 0.78); }
+
+.date { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.date-row { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.date-side { width: 96px; font-size: 13px; line-height: 16px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; }
+.date-side.l { text-align: right; }
+.date-side.r { text-align: left; }
+.vline { width: 1px; height: 56px; background: rgba(201, 166, 107, 0.5); }
+.day-num { font-family: 'Instrument Serif', serif; font-size: 72px; line-height: 72px; }
+.day-name { font-size: 12px; line-height: 16px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--brass); font-weight: 500; }
+.venue { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.venue-name { font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 36px; }
+
+.vine-wrap { position: absolute; top: 240px; width: 40px; height: 440px; pointer-events: none; }
+.vine-wrap.left { left: 0; }
+.vine-wrap.right { right: 0; transform: scaleX(-1); }
+.fx-layer { position: absolute; top: 0; left: 0; width: 540px; height: 960px; overflow: hidden; pointer-events: none; }
+
+/* ---------- keyframes ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); filter: blur(4px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes unmask { from { opacity: 0; clip-path: inset(-15% 100% -15% -2%); transform: translateX(-12px); } to { opacity: 1; clip-path: inset(-15% -2% -15% -2%); transform: none; } }
+@keyframes unmaskup { from { opacity: 0; clip-path: inset(100% 0 0 0); transform: translateY(28px); } to { opacity: 1; clip-path: inset(-5% 0 -5% 0); transform: none; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes growx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes growy { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes pop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes flame { 0%, 100% { transform: scale(1, 1); opacity: 1; } 22% { transform: scale(0.93, 1.08); opacity: 0.92; } 48% { transform: scale(1.05, 0.95); opacity: 0.86; } 74% { transform: scale(0.97, 1.05); opacity: 1; } }
+@keyframes halo { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@keyframes sway { 0%, 100% { transform: rotate(-1.4deg); } 50% { transform: rotate(1.4deg); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spinr { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(90deg); } }
+@keyframes travel { 0% { opacity: 0; offset-distance: 0%; } 6% { opacity: 1; } 94% { opacity: 1; } 100% { opacity: 0; offset-distance: 100%; } }
+@keyframes fall { 0% { opacity: 0; transform: translate3d(0, -40px, 0); } 8% { opacity: var(--o, 0.8); } 92% { opacity: var(--o, 0.8); } 100% { opacity: 0; transform: translate3d(var(--dx), 1000px, 0); } }
+@keyframes flutter { from { transform: translateX(-12px) rotate(-25deg) rotateY(0deg); } to { transform: translateX(12px) rotate(25deg) rotateY(160deg); } }
+@keyframes ping { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes bloomin { from { opacity: 0; transform: rotate(-50deg) scale(0); } to { opacity: 1; transform: none; } }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+@keyframes vreveal { from { clip-path: inset(50% 0 50% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes pdrop { from { opacity: 0; transform: translateY(-10px) scale(0.4); } to { opacity: 1; transform: none; } }
+@keyframes pend { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(3.5deg); } 75% { transform: rotate(-3.5deg); } }
+
+/* ---------- invitation animations ---------- */
+.rise { animation: rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.unmask { animation: unmask 1.5s cubic-bezier(0.65, 0, 0.15, 1) both; animation-delay: var(--d, 0s); }
+.unmaskup { animation: unmaskup 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.fadein { animation: fadein 2.4s ease-out both; animation-delay: var(--d, 0s); }
+.draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw var(--dur, 2.4s) cubic-bezier(0.4, 0, 0.2, 1) both; animation-delay: var(--d, 0s); }
+.growx { transform-origin: center; animation: growx 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.growy { transform-origin: center; animation: growy 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.leaf { transform-box: fill-box; transform-origin: 0% 50%; animation: pop 0.8s cubic-bezier(0.3, 1.4, 0.5, 1) both; animation-delay: var(--d, 0s); }
+.bloom { transform-box: fill-box; transform-origin: 50% 50%; animation: pop 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both; animation-delay: var(--d, 0s); }
+.flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flame 2.8s ease-in-out infinite; }
+.halo { animation: halo 3.4s ease-in-out infinite; }
+.vine { transform-origin: 50% 100%; animation: sway 8s ease-in-out infinite; }
+.spin { animation: spin 160s linear infinite; }
+.twinkle { position: absolute; opacity: 0; animation: twinkle var(--t, 4.4s) ease-in-out infinite; animation-delay: var(--d, 3.6s); }
+.dot {
+  opacity: 0; position: absolute; left: 0; top: 0; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 10px 2px rgba(232, 201, 138, 0.6);
+  offset-path: path('M0.5 631.5 V230 A229.5 229.5 0 0 1 459.5 230 V631.5'); offset-rotate: 0deg;
+  animation: travel 18s linear infinite; animation-delay: 3.2s;
+}
+.petal { position: absolute; top: 0; left: var(--l); perspective: 200px; animation: fall var(--t) linear infinite; animation-delay: var(--w); }
+.flutter { border-radius: 80% 0 80% 0; animation: flutter var(--f, 2.6s) ease-in-out infinite alternate; }
+
+/* ---------- flower button ---------- */
+.seal {
+  position: absolute; left: 410px; top: 636px; width: 104px; height: 104px; padding: 0; margin: 0;
+  border: 0; background: none; color: var(--brass); cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.seal:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.seal-label {
+  position: absolute; left: 50%; top: 114px; margin-left: -70px; width: 140px; text-align: center;
+  font-size: 11px; line-height: 16px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; color: var(--brass);
+}
+.ping { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 1px solid rgba(201, 166, 107, 0.6); border-radius: 50%; opacity: 0; pointer-events: none; animation: ping 2.8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite; animation-delay: 5.8s; }
+.fl-in { transform-origin: 0 0; animation: bloomin 1.4s cubic-bezier(0.3, 1.3, 0.5, 1) backwards; }
+.fl-idle { transform-origin: 0 0; animation: spin 80s linear infinite; }
+.fl-idle2 { transform-origin: 0 0; animation: spinr 60s linear infinite; }
+.fl-t { transform-origin: 0 0; transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
+.seal.open .fl-t1 { transform: rotate(60deg) scale(1.3); }
+.seal.open .fl-t2 { transform: rotate(-60deg) scale(1.18); }
+.core { transform-origin: 0 0; animation: breathe 3.2s ease-in-out infinite; }
+.coredot { fill: var(--brass); transition: fill 0.3s; }
+.seal:hover .coredot { fill: var(--gold); }
+
+/* ---------- video page (only animates while .ov.on) ---------- */
+.ov { position: absolute; top: 0; left: 0; width: 540px; height: 960px; z-index: 10; }
+.ov-layer { position: absolute; top: 0; left: 0; width: 540px; height: 960px; }
+.ov-content { position: absolute; top: 0; left: 0; width: 540px; height: 960px; }
+.abs { position: absolute; }
+.ov.on .v-rise { animation: rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.ov.on .v-unmask { animation: unmask 1.5s cubic-bezier(0.65, 0, 0.15, 1) both; animation-delay: var(--d, 0s); }
+.ov.on .v-draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw var(--dur, 1.8s) cubic-bezier(0.4, 0, 0.2, 1) both; animation-delay: var(--d, 0s); }
+.ov.on .v-growx { transform-origin: center; animation: growx 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.ov.on .v-fade { animation: fadein 2s ease-out both; animation-delay: var(--d, 0s); }
+.ov.on .v-reveal { animation: vreveal 1.4s cubic-bezier(0.7, 0, 0.2, 1) both; animation-delay: 0.85s; }
+.ov.on .v-pend { animation: pdrop 1s cubic-bezier(0.3, 1.4, 0.5, 1) both, pend 5.5s ease-in-out infinite; animation-delay: var(--d, 0s), calc(var(--d, 0s) + 1s); }
+.ov.on .v-spin { animation: spin 160s linear infinite; }
+.ov.on .v-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flame 2.8s ease-in-out infinite; }
+.ov.on .v-halo { animation: halo 3.4s ease-in-out infinite; }
+.v-twinkle { position: absolute; opacity: 0; }
+.ov.on .v-twinkle { animation: twinkle var(--t, 4.4s) ease-in-out infinite; animation-delay: var(--d, 2s); }
+.v-petal { position: absolute; top: 0; left: var(--l); perspective: 200px; }
+.ov.on .v-petal { animation: fall var(--t) linear infinite; animation-delay: var(--w); }
+.fl2 { border-radius: 80% 0 80% 0; }
+.ov.on .fl2 { animation: flutter var(--f, 2.6s) ease-in-out infinite alternate; }
+.video-band { position: absolute; top: 328px; left: 0; width: 540px; height: 304px; overflow: hidden; background: #000; }
+.video-band video { display: block; width: 540px; height: 304px; object-fit: contain; }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .rise, .unmask, .unmaskup, .fadein, .draw, .growx, .growy, .leaf, .bloom, .flame, .halo, .vine, .spin { animation: none; }
+  .ov.on *, .seal * { animation: none !important; }
+  .petal, .twinkle, .dot, .ping, .v-petal, .v-twinkle { display: none; }
+}
